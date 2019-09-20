@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+<h1>Index</h1>
+
+<div id="content">
+	<h2> All Pets </h2>
+	<div id = "all-pets"> </div>
+
+	<h2> Pets Over 5 YRs Old </h2>
+	<div id = "over-5"> </div>
+	
+	
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$.ajax({
+		url: "/pets",
+		method: "GET"
+	}).then(function(data){
+		var count = 0;
+		var $p; 
+
+		for (var i=0; i<data.length; i++){
+			$p = $('<p>'); //<p></p>
+			$p.text(data[i].id + " " + data[i].name); //<p>1 fido</p>
+			$('#all-pets').append($p);
+			// console.log(data[i])
+		}
+	});
+
+	$.ajax({
+		url: "/over-5",
+		method: "GET"
+	}).then(function(data){
+		var count = 0;
+		var $p; 
+
+		for (var i=0; i<data.length; i++){
+			$p = $('<p>'); //<p></p>
+			$p.text(data[i].id + " " + data[i].name); //<p>1 fido</p>
+			$('#over-5').append($p);
+			// console.log(data[i])
+		}
+	});
+</script>
+</body>
+</html>
+
+
+
+
