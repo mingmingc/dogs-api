@@ -1,4 +1,5 @@
 //when refactoring: prepared statements
+//create an owners table
 
 var express = require('express');
 var app = express();
