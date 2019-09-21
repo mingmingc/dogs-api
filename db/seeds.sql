@@ -1,8 +1,6 @@
 USE dogs_db;
 
 INSERT INTO dogs (name, age, breed, owner_name) VALUES
-("baobao", 14, "mixed", "mingming"), ("mishka", 12, "bichon frise", "john"), 
-("buddy", 5, "german shepard", "mingming"), ()
-
-("margarita", 2), ("paris", 10), ("max", 1), ("sagwa", 15), ("mishka", 4), 
-("socks", 7), ("mimi", 5), ("jinx", 7), ("jiji", 8), ("grumpy", 11); 
+("baobao", 14, "mixed", "mingming"), ("mishka", 12, "mixed", "john"), 
+("buddy", 5, "german shepard", "mingming"), ("colbie", 12, "mixed", "lynn"), ("casper", 1, "bernese", "mingming"), ("ray", 2, "daschund", "maddy"),
+("barry", 0, "daschund", "maddy"), ("louis", 6, "goldie", "steph"), ("shira", 3, "pitbull", "joe"), ("riley", 10, "poodle", "dana");

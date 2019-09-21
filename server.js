@@ -9,25 +9,11 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
 	host: "localhost",
-
-	// Your port; if not 3306
 	port: 3306,
-
-	// Your username
 	user: "root",
-
-	// Your password
 	password: "Duckies4$",
-	database: "cats_db"
+	database: "dogs_db"
 });
-
-/*
-	anything in the public folder will have a route for it
-
-		the route will be the name of the file
-
-		the response will be the file itself
-*/
 
 app.use(express.static("public"));
 
