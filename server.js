@@ -24,8 +24,8 @@ app.get('/dogs', function(req, res) {
 	const breed = req.query.breed;
 
 	const ageFilter = age ? " WHERE age > " + age : "";
-	const breedFilter = !age && breed ? " WHERE breed = '" + breed + "'": "";
-	const breedFilter2 = age && breed ? " AND breed = '" + breed + "'" : "";
+	const breedFilter = !age && breed ? " WHERE breed = '" + breed + "'": ""; //if age not provided
+	const breedFilter2 = age && breed ? " AND breed = '" + breed + "'" : ""; //if age is provided
 	connection.query("SELECT * FROM dogs" + ageFilter + breedFilter + breedFilter2, function(err, results) {
 		if (err) throw err;
 		res.json(results);
