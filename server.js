@@ -32,6 +32,30 @@ app.get('/dogs', function(req, res) {
 	})
 })
 
+app.get('/dogs/:id', function(req, res) {
+	const id = req.params.id;
+
+	const idFilter = id ? " WHERE id = " + id : "";
+	connection.query("SELECT * FROM dogs" + idFilter, function(err, results) {
+		if (err) throw err;
+		res.json(results);
+	})
+})
+
+app.post('/dogs', function(req, res) {
+	const name = req.body.name;
+	const age = req.body.age;
+	const breed = req.body.breed;
+	const owner_name = req.body.ownerName;
+	
+	connection.query("INSERT INTO dogs (name, age, breed, owner_name) VALUES ('" 
+	+ name + "', '" + age + "', '" + breed + "', '" + owner_name + "');", function(err, results) {
+		if (err) throw err;
+		res.json(results);
+	});
+})
+
+
 app.listen(3001, function () {
 	console.log('listening on 3001');
 });
