@@ -23,10 +23,10 @@ app.get('/dogs', function(req, res) {
 	const age = req.query.age;
 	const breed = req.query.breed;
 
-	const ageFilter = age ? " WHERE age > " + age : "";
-	const breedFilter = !age && breed ? " WHERE breed = '" + breed + "'": ""; //if age not provided
-	const breedFilter2 = age && breed ? " AND breed = '" + breed + "'" : ""; //if age is provided
-	connection.query("SELECT * FROM dogs" + ageFilter + breedFilter + breedFilter2, function(err, results) {
+	const ageFilter = age ? " WHERE age > ? " : "";
+	const breedFilter = !age && breed ? " WHERE breed = ' ? '": ""; //if age not provided
+	const breedFilter2 = age && breed ? " AND breed = ' ? '" : ""; //if age is provided
+	connection.query("SELECT * FROM dogs" + ageFilter + breedFilter + breedFilter2, [age, breed], function(err, results) {
 		if (err) throw err;
 		res.json(results);
 	})
@@ -35,8 +35,8 @@ app.get('/dogs', function(req, res) {
 app.get('/dogs/:id', function(req, res) {
 	const id = req.params.id;
 
-	const idFilter = id ? " WHERE id = " + id : "";
-	connection.query("SELECT * FROM dogs" + idFilter, function(err, results) {
+	const idFilter = id ? " WHERE id = ? " : "";
+	connection.query("SELECT * FROM dogs" + idFilter, [id], function(err, results) {
 		if (err) throw err;
 		res.json(results);
 	})
@@ -55,6 +55,20 @@ app.post('/dogs', function(req, res) {
 	});
 })
 
+app.put('/dogs/:id', function(req, res) {
+	const id = req.params.id;
+	const age = req.body.age;
+	const breed = req.body.breed;
+	const ownerName = req.body.ownerName;
+
+	const filter = "UPDATE dogs SET age = '" + age + "', breed = '" + breed + "', owner_name = '" 
+	+ ownerName + "' WHERE id = " + id;
+	console.log(filter);
+	connection.query(filter, function(err, results){
+		if (err) throw err;
+		res.json(results);
+	})
+})
 
 app.listen(3001, function () {
 	console.log('listening on 3001');
