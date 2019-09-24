@@ -36,7 +36,7 @@ app.get('/dogs/:id', function(req, res) {
 	const id = req.params.id;
 
 	const idFilter = id ? " WHERE id = ? " : "";
-	connection.query("SELECT * FROM dogs" + idFilter, [id], function(err, results) {
+	connection.query("SELECT * FROM dogs" + idFilter, id, function(err, results) {
 		if (err) throw err;
 		res.json(results);
 	})
@@ -46,10 +46,10 @@ app.post('/dogs', function(req, res) {
 	const name = req.body.name;
 	const age = req.body.age;
 	const breed = req.body.breed;
-	const owner_name = req.body.ownerName;
+	const ownerName = req.body.ownerName;
 	
 	connection.query("INSERT INTO dogs (name, age, breed, owner_name) VALUES (' ? ', ' ? ', ' ? ', ' ? ');",
-	[name, age, breed, owner_name], function(err, results) {
+	[name, age, breed, ownerName], function(err, results) {
 		if (err) throw err;
 		res.json(results);
 	});
@@ -61,13 +61,20 @@ app.put('/dogs/:id', function(req, res) {
 	const breed = req.body.breed;
 	const ownerName = req.body.ownerName;
 
-	const filter = "UPDATE dogs SET age = '" + age + "', breed = '" + breed + "', owner_name = '" 
-	+ ownerName + "' WHERE id = " + id;
+	const filter = "UPDATE dogs SET age = ' ? ', breed = ' ? ', owner_name = '? ' WHERE id = ? ";
 	console.log(filter);
-	connection.query(filter, function(err, results){
+	connection.query(filter, [age, breed, ownerName], function(err, results){
 		if (err) throw err;
 		res.json(results);
+	})
+})
 
+app.delete('/dogs/:id', function(req, res) {
+	const id = req.params.id;
+
+	connection.query("DELETE FROM dogs WHERE id = ?", id, function(err, results) {
+		if (err) throw err;
+		res.json(results);
 	})
 })
 
