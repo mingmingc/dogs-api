@@ -48,8 +48,8 @@ app.post('/dogs', function(req, res) {
 	const breed = req.body.breed;
 	const owner_name = req.body.ownerName;
 	
-	connection.query("INSERT INTO dogs (name, age, breed, owner_name) VALUES ('" 
-	+ name + "', '" + age + "', '" + breed + "', '" + owner_name + "');", function(err, results) {
+	connection.query("INSERT INTO dogs (name, age, breed, owner_name) VALUES (' ? ', ' ? ', ' ? ', ' ? ');",
+	[name, age, breed, owner_name], function(err, results) {
 		if (err) throw err;
 		res.json(results);
 	});
@@ -67,6 +67,7 @@ app.put('/dogs/:id', function(req, res) {
 	connection.query(filter, function(err, results){
 		if (err) throw err;
 		res.json(results);
+
 	})
 })
 
