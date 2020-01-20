@@ -1,18 +1,16 @@
-//when refactoring: prepared statements
-//create an owners table
-
+//create an owner's table!
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-
 var mysql = require('mysql');
+require('dotenv').config();
 
 var connection = mysql.createConnection({
-	host: "localhost",
-	port: 3306,
-	user: "root",
-	password: "Duckies4$",
-	database: "dogs_db"
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PW,
+    database: process.env.MYSQL_DB,
 });
 
 app.use(express.static("public"));
