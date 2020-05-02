@@ -1,2 +1,2 @@
 # dogs-api
-RESTful API using Express.js
+RESTful API using Express, Node, & SQL
