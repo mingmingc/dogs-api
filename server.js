@@ -1,4 +1,3 @@
-//create an owner's table!
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
